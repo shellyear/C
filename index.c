@@ -25,11 +25,16 @@ int demonstrate_memory_reuse() {
     return 0;
 }
 
+int printMemoryAddress() {
+    int x = 45;
+    printf("Memory address of x: %p\n", (void*)&x);
+    printf("Size of int %zu\n", sizeof(int)); // print size of int
+    return 0;
+}
+
 int main() {
-    double height = 180.05;
-    printf("%f\n", height);
-    double third = 1.3;
-    printf("%f", third);
+    int x = 45;
+    
     return 0;
 }
 
