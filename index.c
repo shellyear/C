@@ -1,5 +1,6 @@
 #include <stdio.h> // <stdio.h> is a header file library that lets us work with i/0 functions, such as printf(). Header files add functionality to C programs.
 #include <stdlib.h>
+#include <unistd.h>  // For getpid()
 
 int byteInterpetation() {
     int x = 65;
@@ -27,14 +28,15 @@ int demonstrate_memory_reuse() {
 
 int printMemoryAddress() {
     int x = 45;
-    printf("Memory address of x: %p\n", (void*)&x);
+    printf("Memory address of x: %p\n", (void*)&x); // Virtual memory address; MMU does not allow direct access to physical memory; The virtual address is translated into a physical address via page tables managed by the OS.
     printf("Size of int %zu\n", sizeof(int)); // print size of int
     return 0;
 }
 
 int main() {
-    int x = 45;
-    
+    const int myNum;
+    printf("%d", myNum);
+    printf("PID: %d", getpid());
     return 0;
 }
 
