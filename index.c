@@ -27,7 +27,13 @@ int demonstrate_memory_reuse() {
 }
 
 int printMemoryAddress() {
-    int x = 45; // local variable (declared inside a function); Local variables are stored in the stack memory (virtual memory space of the process). 
+    int x = 45; // local variable (declared inside a function);
+    /*
+        Local variables are stored in the stack memory (virtual memory space of the process). 
+        The stack is an abstraction, referring to a region in the virtual address space of a process.
+        The stack appears continuous in virtual memory but is scattered in physical memory.
+        The OS and CPU MMU handle mapping stack pages from virtual to physical memory.
+    */ 
     printf("Memory address of x: %p\n", (void*)&x); // Virtual memory address; 
     /* 1. MMU (Memory Management Unit) does not allow user-space processes direct access to physical memory; 
           Instead, the OS provides each process with a virtual memory space.
