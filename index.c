@@ -28,7 +28,17 @@ int demonstrate_memory_reuse() {
 
 int printMemoryAddress() {
     int x = 45;
-    printf("Memory address of x: %p\n", (void*)&x); // Virtual memory address; MMU does not allow direct access to physical memory; The virtual address is translated into a physical address via page tables managed by the OS.
+    printf("Memory address of x: %p\n", (void*)&x); // Virtual memory address; 
+    /* 1. MMU (Memory Management Unit) does not allow direct access to physical memory; 
+          Instead, the OS provides each process with a virtual memory space.
+          The virtual address is translated into a physical address via page tables managed by the OS.
+       2. Process Isolation - Each process gets its own isolated virtual address space.
+          Even if two programs declare int x = 45;, they will have different virtual addresses.
+       3. Address Randomization (ASLR - Address Space Layout Randomization)
+          The OS randomizes memory addresses for security.
+          Running the same program multiple times may show different addresses.
+    */
+
     printf("Size of int %zu\n", sizeof(int)); // print size of int
     return 0;
 }
