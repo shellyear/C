@@ -29,7 +29,7 @@ int demonstrate_memory_reuse() {
 int printMemoryAddress() {
     int x = 45;
     printf("Memory address of x: %p\n", (void*)&x); // Virtual memory address; 
-    /* 1. MMU (Memory Management Unit) does not allow direct access to physical memory; 
+    /* 1. MMU (Memory Management Unit) does not allow user-space processes direct access to physical memory; 
           Instead, the OS provides each process with a virtual memory space.
           The virtual address is translated into a physical address via page tables managed by the OS.
        2. Process Isolation - Each process gets its own isolated virtual address space.
