@@ -71,6 +71,45 @@ void multipleUserInput() {
     printf("Your character is: %c\n", myChar);
 }
 
+void showcasePointers() {
+    int age = 20;
+    char letter = 'A';
+
+    int *agePtr = &age; // &age is a memory address of age; *agePtr is a variable holding this address
+    char *letterPtr = &letter;
+
+    printf("%p\n", agePtr); // 0x7ffe5367e044 (some memory address)
+    printf("%p\n", letterPtr); // 0x7ffe5367e144 (some memory address)
+
+    printf("%d\n", *agePtr); // DEREFENCE - *agePtr to get the value of memory address  (to get the value of the variable the pointer points to)
+    // printf("%d", *&25); address-of operator (&) can only be used on variables (like &age), not constants. 
+    /*
+      You cannot take the address of a constant/literal (like &43).
+      The reason 43 is considered a constant (or literal) is because it is a fixed value written directly in the code
+      🔹 Are All Constants Immutable?
+        Not always! Some constants do have memory addresses:
+     */
+    const int num = 25;
+    printf("%p\n", &num);  // ✅ Works, because `num` is stored in memory
+
+    /* 🔹 Does just 25 (integer literal) Exist in Memory? */
+    /*    Case: 1 - Using 25 Directly (No Address) */
+    printf("%d", 25); /*
+        Here, 25 is an integer literal. 
+        It is embedded directly into the CPU instruction.
+        It does not get a memory address because it's not stored in RAM.
+
+        How does the CPU handle this?
+        - The compiler might replace printf("%d", 25); 
+          with machine code that directly loads 25 into a CPU register.
+          ✔ No memory storage = No memory address.
+    */
+   /* Case: 2 -  Assigning 25 to a Variable (Has Address) */
+   int num = 25; // Now, 25 is stored in RAM, inside num's memory location. 
+   printf("%p\n", &num); // &num gives its memory address.
+   
+}
+
 int demonstrate_memory_reuse() {
     int *p = malloc(4);  // Allocate memory for an int
     printf("Memory before: %d\n", *p); // Might print garbage value
@@ -110,15 +149,6 @@ int printMemoryAddress() {
 }
 
 int main() {
-    char fullName[30];
-
-    printf("Type your full name: \n");
-    fgets(fullName, sizeof(fullName), stdin);
-
-    printf("Hello %s", fullName);
-
-    for (int i = 0; i < 30; i++) {
-        printf("char: %c; ASCII value: %d\n", fullName[i], fullName[i]);
-    }
+    showcasePointers();
     return 0;
 }
