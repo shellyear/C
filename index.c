@@ -46,6 +46,15 @@ void stringComparison() {
     */
 }
 
+void takeUserInput() {
+    int myNum;
+    printf("Type a number: \n");
+    printf("Memory address of myNum is: %p\n", &myNum);
+
+
+    scanf("%d", &myNum); // &myNum is the memory address of variable myNum
+}
+
 int demonstrate_memory_reuse() {
     int *p = malloc(4);  // Allocate memory for an int
     printf("Memory before: %d\n", *p); // Might print garbage value
@@ -85,8 +94,12 @@ int printMemoryAddress() {
 }
 
 int main() {
-    char str1[] = "Hello";
-    char str2[] = "Hello";
+    int myNum;
+    printf("Type a number: \n");
+    printf("Memory address of myNum is: %p\n", &myNum);
 
+    scanf("%d", &myNum);
+    printf("The number you typed is: %d \n", myNum);
+    printf("Memory address of myNum is: %p\n", &myNum);
     return 0;
 }
