@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>  // For getpid()
 #include <stdbool.h>  // Import the boolean header file 
-#include <string.h> // imports "strlen", "strcat", "strcpy" and more string functions
+#include <string.h> // imports "strlen", "strcat", "strcpy", "strcmp" and more string functions
 
 
 int byteInterpetation() {
