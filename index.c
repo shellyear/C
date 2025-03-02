@@ -1,6 +1,8 @@
 #include <stdio.h> // <stdio.h> is a header file library that lets us work with i/0 functions, such as printf(). Header files add functionality to C programs.
 #include <stdlib.h>
 #include <unistd.h>  // For getpid()
+#include <stdbool.h>  // Import the boolean header file 
+
 
 int byteInterpetation() {
     int x = 65;
@@ -8,6 +10,8 @@ int byteInterpetation() {
     printf("%c\n", c);
     printf("%d\n", x);
     // The same bytes can be interpreted differently depending on how you access them.
+    printf("%d\n", 'A'); // 65
+    printf("%c\n", 'A'); // A
     return 0;
 }
 
@@ -50,9 +54,18 @@ int printMemoryAddress() {
 }
 
 int main() {
-    const int myNum;
-    printf("%d", myNum);
-    printf("PID: %d", getpid());
+    // char chineseChar = '漢';
+
+    // printf("%c", chineseChar);
+    // char input[10];
+
+    // for (int i = 0; i < 10; i++) {
+    //     if (input[i] == '\0') {
+    //         printf("null terminator encountered %c\n", input[i]);
+    //     }
+    //     printf("index: %d %c\n", i, input[i]);
+    // }
+    // printf("%d", 'A');
+    printf("%c\n", 'A'); // A
     return 0;
 }
-
