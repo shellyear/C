@@ -3,6 +3,7 @@
 #include <unistd.h>  // For getpid()
 #include <stdbool.h>  // Import the boolean header file 
 #include <string.h> // imports "strlen", "strcat", "strcpy", "strcmp" and more string functions
+#include <ctype.h> // isspace
 
 
 int byteInterpetation() {
@@ -53,6 +54,9 @@ void takeUserInput() {
 
 
     scanf("%d", &myNum); // &myNum is the memory address of variable myNum
+
+    char fullName[30]; 
+    fgets(fullName, sizeof(fullName), stdin); // read a line of text
 }
 
 void multipleUserInput() {
@@ -106,6 +110,15 @@ int printMemoryAddress() {
 }
 
 int main() {
-    multipleUserInput();
+    char fullName[30];
+
+    printf("Type your full name: \n");
+    fgets(fullName, sizeof(fullName), stdin);
+
+    printf("Hello %s", fullName);
+
+    for (int i = 0; i < 30; i++) {
+        printf("char: %c; ASCII value: %d\n", fullName[i], fullName[i]);
+    }
     return 0;
 }
