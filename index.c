@@ -29,6 +29,23 @@ int byteInterpetation() {
     return 0;
 }
 
+void stringComparison() {
+    char str1[] = "Hello";
+    char str2[] = "Hello";
+
+    printf("%d", strcmp(str1, str2)); // output: 0; 0 indicates that there is no difference
+    printf("%d", strcmp("A", "C")); // -1; 
+    printf("%d", strcmp("C", "A")); // 1;
+    /*
+        The return value of strcmp() is not guaranteed to be exactly -1, 0, or 1.
+        It only guarantees:
+            0 if the strings are equal.
+            A negative value if the first string is smaller.
+            A positive value if the first string is greater.
+        The exact negative or positive value depends on the system/compiler implementation.
+    */
+}
+
 int demonstrate_memory_reuse() {
     int *p = malloc(4);  // Allocate memory for an int
     printf("Memory before: %d\n", *p); // Might print garbage value
@@ -68,9 +85,8 @@ int printMemoryAddress() {
 }
 
 int main() {
-    char str[20] = "Hello ";
-    char str2[] = "World";
-    strcat(str, str2);
-    printf("%s", str);
+    char str1[] = "Hello";
+    char str2[] = "Hello";
+
     return 0;
 }
