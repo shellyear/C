@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>  // For getpid()
 #include <stdbool.h>  // Import the boolean header file 
+#include <string.h> // imports "strlen", "strcat", "strcpy" and more string functions
 
 
 int byteInterpetation() {
@@ -67,17 +68,9 @@ int printMemoryAddress() {
 }
 
 int main() {
-    // char chineseChar = '漢';
-
-    // printf("%c", chineseChar);
-    // char input[10];
-
-    // for (int i = 0; i < 10; i++) {
-    //     if (input[i] == '\0') {
-    //         printf("null terminator encountered %c\n", input[i]);
-    //     }
-    //     printf("index: %d %c\n", i, input[i]);
-    // }
-
+    char str[20] = "Hello ";
+    char str2[] = "World";
+    strcat(str, str2);
+    printf("%s", str);
     return 0;
 }
