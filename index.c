@@ -5,13 +5,26 @@
 
 
 int byteInterpetation() {
-    int x = 65;
+    int x = 65; // same as int x = 'A'
     char c = x;
+    char cc = 65;
     printf("%c\n", c);
     printf("%d\n", x);
     // The same bytes can be interpreted differently depending on how you access them.
+    // In C, character literals are treated as small integer constants.
     printf("%d\n", 'A'); // 65
-    printf("%c\n", 'A'); // A
+    printf("%c\n", 'A'); // A 
+    // 'A' is equivalent to its ASCII (or Unicode) value, which is 65 in decimal.
+    int sum = 'A' + 1;  // Works naturally as 'A' is an int (value 65) (by default); So, the expression 'A' + 1 is just integer addition: 65 + 1 = 66. 
+    printf("%d", sum); // 66
+
+    /*
+        - char Can Be Either Signed or Unsigned
+        - In C, char is implementation-defined, meaning it can be either signed char or unsigned char, 
+          depending on the compiler and system.
+        - signed char - Always -128 to 127
+        - unsigned char	- Always 0 to 255
+    */
     return 0;
 }
 
@@ -65,7 +78,6 @@ int main() {
     //     }
     //     printf("index: %d %c\n", i, input[i]);
     // }
-    // printf("%d", 'A');
-    printf("%c\n", 'A'); // A
+
     return 0;
 }
