@@ -55,6 +55,18 @@ void takeUserInput() {
     scanf("%d", &myNum); // &myNum is the memory address of variable myNum
 }
 
+void multipleUserInput() {
+    int myNum;
+    char myChar;
+
+    printf("Type a number AND a character and press enter: \n");
+
+    scanf("%d %c", &myNum, &myChar);
+
+    printf("Your number is: %d\n", myNum);
+    printf("Your character is: %c\n", myChar);
+}
+
 int demonstrate_memory_reuse() {
     int *p = malloc(4);  // Allocate memory for an int
     printf("Memory before: %d\n", *p); // Might print garbage value
@@ -94,12 +106,6 @@ int printMemoryAddress() {
 }
 
 int main() {
-    int myNum;
-    printf("Type a number: \n");
-    printf("Memory address of myNum is: %p\n", &myNum);
-
-    scanf("%d", &myNum);
-    printf("The number you typed is: %d \n", myNum);
-    printf("Memory address of myNum is: %p\n", &myNum);
+    multipleUserInput();
     return 0;
 }
