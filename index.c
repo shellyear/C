@@ -105,8 +105,8 @@ void showcasePointers() {
           ✔ No memory storage = No memory address.
     */
    /* Case: 2 -  Assigning 25 to a Variable (Has Address) */
-   int num = 25; // Now, 25 is stored in RAM, inside num's memory location. 
-   printf("%p\n", &num); // &num gives its memory address.
+   int someNum = 25; // Now, 25 is stored in RAM, inside someNum's memory location. 
+   printf("%p\n", &someNum); // &num gives its memory address.
    
 }
 
@@ -149,6 +149,8 @@ int printMemoryAddress() {
 }
 
 int main() {
-    showcasePointers();
+    int x = 45;
+    int *intPtr = &x;
+    printf("%d", *&x);
     return 0;
 }
