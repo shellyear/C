@@ -94,21 +94,6 @@ void showcaseArrayAndPointers() {
     printf("%d\n", *(myNumbers + 1)); // 17
 }
 
-// In C, when you pass an array to a function, it decays into a pointer to its first element.
-// This means char name[] is equivalent to char *name.
-// So the function actually receives a pointer to a character (char *), not a full array.
-/*
-    - this function is exactly the same as functionWithPointerParameter
-
-    void myFunction(char *name) {
-        printf("Hello %s\n", name);
-    }
-*/
-void functionWithPointerParameter(char name[]) {
-    printf("Hello: %s", name);
-}
-
-
 int demonstrate_memory_reuse() {
     int *p = malloc(4);  // Allocate memory for an int
     printf("Memory before: %d\n", *p); // Might print garbage value
@@ -147,7 +132,30 @@ int printMemoryAddress() {
     return 0;
 }
 
+// In C, when you pass an array to a function, it decays into a pointer to its first element.
+// This means char name[] is equivalent to char *name.
+// So the function actually receives a pointer to a character (char *), not a full array.
+/*
+    - this function is exactly the same as functionWithPointerParameter
+
+    void myFunction(char *name) {
+        printf("Hello %s\n", name);
+    }
+*/
+void functionWithPointerParameter(char name[]) { // functionWithReferenceTypeParameter
+    name[0] = 'K';
+    printf("Hello: %s\n", name);
+}
+
+// When calling functionWithPrimitiveTypeParameters(5, 10), copies of 5 and 10 are created inside the function
+void functionWithPrimitiveTypeParameters(int x, int y) { // function with value(primitive type) parameters
+    int sum = x + y;
+    printf("%d\n", sum);
+}
+
 int main() {
-    showcaseArrayAndPointers();
+    char name[] = "Lisa";
+    functionWithPointerParameter(name);
+    printf("%s\n", name);
     return 0;
 }
