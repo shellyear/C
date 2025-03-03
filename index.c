@@ -74,7 +74,7 @@ void multipleUserInput() {
 void showcasePointers() {
     int age = 20;
     char letter = 'A';
-
+    /* A pointer is a variable that stores the memory address of another variable as its value. */
     int *agePtr = &age; // &age is a memory address of age; *agePtr is a variable holding this address
     char *letterPtr = &letter;
 
