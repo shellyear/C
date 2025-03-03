@@ -110,6 +110,33 @@ void showcasePointers() {
    
 }
 
+void showcaseArrayAndPointers() {
+    int myNumbers[4] = {25, 50, 75, 100};
+    for (int i = 0; i < 4; i++) {
+        printf("%p\n", &myNumbers[i]);
+    }
+    /*in C the name of an array, is actually a pointer to the first element of the array. */
+    // When used in an expression, myNumbers is implicitly(automatically) converted to &myNumbers[0].
+    printf("Memory address of array is the memory address of the first element of array: %p %p\n", myNumbers, &myNumbers[0]); 
+
+    // Get the value of the first element in myNumbers
+    printf("%d\n", *myNumbers); // 25
+
+    /* get values from memory adresses of an array */
+    printf("Get values from memory adresses of an array\n");
+    for (int i = 0; i < 4; i++) {
+        printf("%d\n", *(myNumbers + i));
+    }
+
+    /* It is also possible to change the value of array elements with pointers: */
+    printf("It is also possible to change the value of array elements with pointers: \n");
+    *myNumbers = 13; // Change the value of the first element of the array to 13
+    *(myNumbers + 1) = 17; // Change the value of the second element to 17
+
+    printf("%d\n", *myNumbers); // 13
+    printf("%d\n", *(myNumbers + 1)); // 17
+}
+
 int demonstrate_memory_reuse() {
     int *p = malloc(4);  // Allocate memory for an int
     printf("Memory before: %d\n", *p); // Might print garbage value
@@ -149,8 +176,6 @@ int printMemoryAddress() {
 }
 
 int main() {
-    int x = 45;
-    int *intPtr = &x;
-    printf("%d", *&x);
+    showcaseArrayAndPointers();
     return 0;
 }
