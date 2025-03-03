@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>  // For getpid()
 #include <stdbool.h>  // Import the boolean header file 
-#include <string.h> // imports "strlen", "strcat", "strcpy", "strcmp" and more string functions
 #include <ctype.h> // isspace
-
 
 int byteInterpetation() {
     int x = 65; // same as int x = 'A'
@@ -30,22 +28,6 @@ int byteInterpetation() {
     return 0;
 }
 
-void stringComparison() {
-    char str1[] = "Hello";
-    char str2[] = "Hello";
-
-    printf("%d", strcmp(str1, str2)); // output: 0; 0 indicates that there is no difference
-    printf("%d", strcmp("A", "C")); // -1; 
-    printf("%d", strcmp("C", "A")); // 1;
-    /*
-        The return value of strcmp() is not guaranteed to be exactly -1, 0, or 1.
-        It only guarantees:
-            0 if the strings are equal.
-            A negative value if the first string is smaller.
-            A positive value if the first string is greater.
-        The exact negative or positive value depends on the system/compiler implementation.
-    */
-}
 
 void takeUserInput() {
     int myNum;
@@ -136,6 +118,21 @@ void showcaseArrayAndPointers() {
     printf("%d\n", *myNumbers); // 13
     printf("%d\n", *(myNumbers + 1)); // 17
 }
+
+// In C, when you pass an array to a function, it decays into a pointer to its first element.
+// This means char name[] is equivalent to char *name.
+// So the function actually receives a pointer to a character (char *), not a full array.
+/*
+    - this function is exactly the same as functionWithPointerParameter
+
+    void myFunction(char *name) {
+        printf("Hello %s\n", name);
+    }
+*/
+void functionWithPointerParameter(char name[]) {
+    printf("Hello: %s", name);
+}
+
 
 int demonstrate_memory_reuse() {
     int *p = malloc(4);  // Allocate memory for an int
