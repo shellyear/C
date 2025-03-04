@@ -71,3 +71,30 @@ Low Memory (Smallest Addresses)
     3. Heap Allocation Failure
        - If the heap tries to expand but there’s no space, malloc() returns NULL, and your program should handle this.
 
+4️⃣. C compiling stages:
+   - Compiling C code happens in four main stages, often abbreviated as PPLC:
+     1️⃣ Preprocessing (cpp)
+        - Expands macros, includes headers, and processes # directives, removes comments
+        - gcc -E program.c -o program.i
+     2️⃣ Compilation (cc1)
+        - Checks for syntax errors
+        - Optimizes the code.
+        - Translates high-level C code into assembly instructions.
+        - gcc -S program.i -o program.s
+     3️⃣ Assembly (as)
+        - Translates Assembly instructions into CPU instructions (binary).
+        - Assigns labels (symbols/symbolic addresses) to variables and functions for variables & functions within the object file (.o)
+          These symbols are not yet assigned final memory addresses — instead, they are given relative locations within sections (like .text, .data, .bss, .rodata)
+          The assembler generates a relocatable object file (.o), where function and variable addresses are still placeholders.
+        - Creates an object file (.o)
+        - gcc -c program.s -o program.o
+     4️⃣ Linking (ld)
+        - Resolves function calls (e.g., printf() → libc)
+        - Links multiple object files (.o) together
+        - Replaces symbols with actual memory addresses (it decides them based on predefined rules, system constraints, and the memory layout of the program)
+        - Adds standard library code (like stdio.h)
+        - Produces the final executable file
+
+   This runs all four stages automatically: gcc program.c -o program
+
+
