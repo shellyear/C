@@ -1,4 +1,4 @@
-1.  memory layout of process
+1️⃣.  memory layout of process
 
 ## General Multi-Threaded Process Memory Layout
 - Each process has a virtual memory space divided into different segments. Some of these segments are shared among all threads, while others (like the stack) are unique to each thread.
@@ -26,7 +26,7 @@ High Memory (Largest Addresses)
 ---------------------------------------------------
 Low Memory (Smallest Addresses)
 
-2. How much memory each segment of memory layout takes
+2️⃣. How much memory each segment of memory layout takes
 
 ## General Multi-Threaded Process Memory Layout
 High Memory (Largest Addresses)
@@ -52,7 +52,7 @@ High Memory (Largest Addresses)
 --------------------------------------------------------------------------------
 Low Memory (Smallest Addresses)
 
-3. Heap (Grows up) theoretically can collide with stacks(Grows down in memory)
+3️⃣. Heap (Grows up) theoretically can collide with stacks(Grows down in memory)
 
    - Modern OS's implement protections to prevent this from happening:
    1. The OS ensures there’s enough gap between the heap and stacks to prevent overlap
