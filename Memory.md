@@ -1,0 +1,73 @@
+1.  memory layout of process (ask chatgpt)
+
+## General Multi-Threaded Process Memory Layout
+- Each process has a virtual memory space divided into different segments. Some of these segments are shared among all threads, while others (like the stack) are unique to each thread.
+
+High Memory (Largest Addresses)
+---------------------------------------------------
+|  Command-line Arguments & Environment Variables  | Read-Only  (r--); Shared by all threads
+---------------------------------------------------
+|  Thread 1 Stack (Grows Down)                     | Read-Write (rw-)
+|  Thread 2 Stack (Grows Down)                     | Read-Write (rw-)
+|  Thread 3 Stack (Grows Down)                     | Read-Write (rw-)
+|  ...                                             | Private to each thread
+---------------------------------------------------
+|  Heap (Grows Up)                                 | Read-Write (rw-)
+|  Used for dynamically allocated memory (malloc)  | Shared by all threads
+---------------------------------------------------
+|  BSS (Uninitialized Global/Static Variables)     | Read-Write (rw-) 
+|  Stores uninitialized global/static variables    | Shared by all threads                
+---------------------------------------------------
+|  Data (Initialized Global/Static Variables)      | Read-Write (rw-)
+|  Stores initialized global/static variables      | Shared by all threads
+---------------------------------------------------
+|  Text (Code Segment - Executable Instructions)   | Read-Execute (r-x)
+|  Stores machine code (compiled program)          | Shared by all threads
+---------------------------------------------------
+Low Memory (Smallest Addresses)
+
+2. How much memory each segment of memory layout takes
+
+## General Multi-Threaded Process Memory Layout
+High Memory (Largest Addresses)
+--------------------------------------------------------------------------------
+|  Command-line Arguments & Environment Variables  | ~128KB - 2MB   | Read-Only  (r--) |
+--------------------------------------------------------------------------------
+|  Thread 1 Stack (Grows Down)                     | ~8MB (Default) | Read-Write (rw-) |
+|  Thread 2 Stack (Grows Down)                     | ~8MB (Default) | Read-Write (rw-) |
+|  Thread 3 Stack (Grows Down)                     | ~8MB (Default) | Read-Write (rw-) |
+|  ...                                             |                |                 |
+--------------------------------------------------------------------------------
+|  Heap (Grows Up)                                 | Dynamic        | Read-Write (rw-) |
+|  Used for dynamically allocated memory (malloc)  |                |                 |
+--------------------------------------------------------------------------------
+|  BSS (Uninitialized Global/Static Variables)     | ~8KB - 1MB     | Read-Write (rw-) |
+|  Stores uninitialized global/static variables    |                |                 |
+--------------------------------------------------------------------------------
+|  Data (Initialized Global/Static Variables)      | ~8KB - 1MB     | Read-Write (rw-) |
+|  Stores initialized global/static variables      |                |                 |
+--------------------------------------------------------------------------------
+|  Text (Code Segment - Executable Instructions)   | ~1MB - 10MB    | Read-Execute (r-x) |
+|  Stores machine code (compiled program)          |                |                 |
+--------------------------------------------------------------------------------
+Low Memory (Smallest Addresses)
+
+3. Heap (Grows up) theoretically can collide with stacks(Grows down in memory)
+
+   - Modern OS's implement protections to prevent this from happening:
+   1. The OS ensures there’s enough gap between the heap and stacks to prevent overlap
+      - If the heap gets too large, the OS moves it using mmap() instead of sbrk().
+   2. The OS places a guard page (a small protected memory region) below each stack.
+      - If a stack overflows into this guard page → segmentation fault happens before the heap is reached.
+   3. 🔹 Heap Allocations Use mmap() When Large
+      - If malloc() requests a very large chunk of memory (e.g., >128KB), it doesn’t use the normal heap.
+      - Instead, it allocates memory using mmap(), which places the memory elsewhere, avoiding stack collisions.
+
+    🔹 What Happens If a Collision Occurs?
+    1. Segmentation Fault (SIGSEGV)
+       - If the stack overflows into protected memory, the OS terminates the process.
+    2. Silent Memory Corruption (Rare, but Dangerous)
+       - If protections are disabled (e.g., custom memory management), the heap might overwrite the stack or vice versa, causing random crashes.
+    3. Heap Allocation Failure
+       - If the heap tries to expand but there’s no space, malloc() returns NULL, and your program should handle this.
+
