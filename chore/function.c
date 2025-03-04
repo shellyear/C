@@ -10,7 +10,8 @@
         printf("Hello %s\n", name);
     }
 */
-void functionWithPointerParameter(char name[]) { // functionWithReferenceTypeParameter
+
+void functionWithReferenceTypeParameter(char name[]) { // functionWithPointerParameter
     name[0] = 'K';
     printf("Hello: %s\n", name);
 }
