@@ -1,4 +1,4 @@
-1.  memory layout of process (ask chatgpt)
+1.  memory layout of process
 
 ## General Multi-Threaded Process Memory Layout
 - Each process has a virtual memory space divided into different segments. Some of these segments are shared among all threads, while others (like the stack) are unique to each thread.
