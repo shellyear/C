@@ -26,3 +26,6 @@
 
 
 2️⃣. The separation of declaration and definition of functions in C
+
+3️⃣. How recursion is possible in C, what C or C compiler future allows the function to use itself ?
+   - The process of recursion in C works the same way as any other function call at the assembly level. 
