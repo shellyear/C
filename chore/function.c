@@ -24,7 +24,7 @@ void functionWithPrimitiveTypeParameters(int x, int y) { // function with value(
 int main() {
     /* functionWithPointerParameter("Lisa"); */
     /* 
-        1. "Lisa" is a string literal, stored in a read-only memory section. 
+        1. "Lisa" is a string literal, stored in a read-only section of memory of RAM (.section .rodata for (x86/x86_64, ARM) assembly, or __TEXT,__cstring for (ARM64 - M1/M2) assembly). 
         The function receives a pointer to the first character ('L') in "Lisa".
         Attempting to modify a string literal (name[0] = 'K') causes undefined behavior(UB)!
     */
