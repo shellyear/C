@@ -3,56 +3,58 @@
 ## General Multi-Threaded Process Memory Layout
 - Each process has a virtual memory space divided into different segments. Some of these segments are shared among all threads, while others (like the stack) are unique to each thread.
 
-High Memory (Largest Addresses)
----------------------------------------------------
-|  Command-line Arguments & Environment Variables  | Read-Only  (r--); Shared by all threads
----------------------------------------------------
-|  Thread 1 Stack (Grows Down)                     | Read-Write (rw-)
-|  Thread 2 Stack (Grows Down)                     | Read-Write (rw-)
-|  Thread 3 Stack (Grows Down)                     | Read-Write (rw-)
-|  ...                                             | Private to each thread
----------------------------------------------------
-|  Heap (Grows Up)                                 | Read-Write (rw-)
-|  Used for dynamically allocated memory (malloc)  | Shared by all threads
----------------------------------------------------
-|  BSS (Uninitialized Global/Static Variables)     | Read-Write (rw-) 
-|  Stores uninitialized global/static variables    | Shared by all threads                
----------------------------------------------------
-|  Data (Initialized Global/Static Variables)      | Read-Write (rw-)
-|  Stores initialized global/static variables      | Shared by all threads
----------------------------------------------------
-|  Text (Code Segment - Executable Instructions)   | Read-Execute (r-x)
-|  Stores machine code (compiled program)          | Shared by all threads
----------------------------------------------------
-Low Memory (Smallest Addresses)
+HIGH MEMORY (Largest Addresses)
+────────────────────────────────────────────────────────────
+|  KERNEL SPACE (NOT directly Accessible to Process)   |  <-- Managed by OS - shared by all processes. (KERNEL SPACE is not part of the process, it belongs to the OS)
+|  - System calls, device drivers, memory management   |   When a process needs to interact with the kernel (e.g., file I/O, networking, memory management), it must use system calls (like read(), write(), mmap())
+────────────────────────────────────────────────────────────
+|  COMMAND-LINE ARGUMENTS & ENV VARIABLES              |  ~128KB - 2MB  
+|  - Passed to `main()` on program start               |  Read-Only (r--)  
+|  - Shared by all threads                             |
+────────────────────────────────────────────────────────────
+|  THREAD 1 STACK (Grows Down)                         |  ~8MB (Default)
+|  - Function calls, return addresses, local vars      |  Read-Write (rw-)  
+|  - Private to Thread 1                               |
+|------------------------------------------------------|
+|  THREAD 1 GUARD PAGE (Protects Stack)                |  ~4KB - 64KB  (---)
+|------------------------------------------------------|
+|  THREAD 1 LOCAL STORAGE (TLS)                        |  ~8KB - 64KB  
+|  - Stores thread-specific `thread_local` variables   |  Read-Write (rw-)  
+|  - Private to Thread 1                               |  
+────────────────────────────────────────────────────────────
+|  MAIN THREAD STACK (Grows Down)                      |  ~8MB (Default)
+|  - Function calls, return addresses, local vars      |  Read-Write (rw-)  
+|  - Private to Main Thread                            |
+|------------------------------------------------------|
+|  MAIN THREAD GUARD PAGE (Protects Stack)             |  ~4KB - 64KB  (---)  
+|------------------------------------------------------|
+|  MAIN THREAD LOCAL STORAGE (TLS)                     |  ~8KB - 64KB  
+|  - Stores thread-specific `thread_local` variables   |  Read-Write (rw-)  
+|  - Private to Main Thread                            |
+────────────────────────────────────────────────────────────
+|  HEAP (Grows Up)                                     |  Dynamic
+|  - Stores dynamically allocated memory (`malloc`)    |  Read-Write (rw-)  
+|  - Shared by both threads                            |  BSS - Block Started by Symbol
+────────────────────────────────────────────────────────────
+|  BSS (Uninitialized Global/Static Variables)         |  ~8KB - 1MB
+|  - Global/static variables with no explicit value    |  Read-Write (rw-)
+|  - Shared by both threads                            |
+────────────────────────────────────────────────────────────
+|  DATA (Initialized Global/Static Variables)          |  ~8KB - 1MB  
+|  - Global/static variables with initial values       |  Read-Write (rw-)  
+|  - Shared by both threads                            |
+────────────────────────────────────────────────────────────
+|  READ-ONLY DATA (.rodata)                            |  ~4KB - 1MB  
+|  - Stores constants, string literals, `const` vars   |  Read-Only (r--)  
+|  - Shared by both threads                            |
+────────────────────────────────────────────────────────────
+|  TEXT (CODE SEGMENT)                                 |  ~1MB - 10MB  
+|  - Stores executable machine code                    |  Read-Execute (r-x)  
+|  - Shared by both threads                            |
+────────────────────────────────────────────────────────────
+LOW MEMORY (Smallest Addresses)
 
-2️⃣. How much memory each segment of memory layout takes
-
-## General Multi-Threaded Process Memory Layout
-High Memory (Largest Addresses)
---------------------------------------------------------------------------------
-|  Command-line Arguments & Environment Variables  | ~128KB - 2MB   | Read-Only  (r--) |
---------------------------------------------------------------------------------
-|  Thread 1 Stack (Grows Down)                     | ~8MB (Default) | Read-Write (rw-) |
-|  Thread 2 Stack (Grows Down)                     | ~8MB (Default) | Read-Write (rw-) |
-|  Thread 3 Stack (Grows Down)                     | ~8MB (Default) | Read-Write (rw-) |
-|  ...                                             |                |                 |
---------------------------------------------------------------------------------
-|  Heap (Grows Up)                                 | Dynamic        | Read-Write (rw-) |
-|  Used for dynamically allocated memory (malloc)  |                |                 |
---------------------------------------------------------------------------------
-|  BSS (Uninitialized Global/Static Variables)     | ~8KB - 1MB     | Read-Write (rw-) |
-|  Stores uninitialized global/static variables    |                |                 |
---------------------------------------------------------------------------------
-|  Data (Initialized Global/Static Variables)      | ~8KB - 1MB     | Read-Write (rw-) |
-|  Stores initialized global/static variables      |                |                 |
---------------------------------------------------------------------------------
-|  Text (Code Segment - Executable Instructions)   | ~1MB - 10MB    | Read-Execute (r-x) |
-|  Stores machine code (compiled program)          |                |                 |
---------------------------------------------------------------------------------
-Low Memory (Smallest Addresses)
-
-3️⃣. Heap (Grows up) theoretically can collide with stacks(Grows down in memory)
+2️⃣. Heap (Grows up) theoretically can collide with stacks(Grows down in memory)
 
    - Modern OS's implement protections to prevent this from happening:
    1. The OS ensures there’s enough gap between the heap and stacks to prevent overlap
