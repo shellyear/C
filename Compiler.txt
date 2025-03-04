@@ -23,3 +23,6 @@
         - Produces the final executable file
 
    This runs all four stages automatically: gcc program.c -o program
+
+
+2️⃣. The separation of declaration and definition of functions in C
