@@ -1,4 +1,4 @@
-1️⃣.  memory layout of process
+1️⃣.  memory layout of process (process structure in a UNIX-base OS environment)
 
 ## General Multi-Threaded Process Memory Layout
 - Each process has a virtual memory space divided into different segments. Some of these segments are shared among all threads, while others (like the stack) are unique to each thread.
