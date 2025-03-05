@@ -1,4 +1,4 @@
-1️⃣.  memory layout of process (process structure in a UNIX-base OS environment)
+1️⃣.  Memory layout of process (process structure in a UNIX-based OS environment)
 
 ## General Multi-Threaded Process Memory Layout
 - Each process has a virtual memory space divided into different segments. Some of these segments are shared among all threads, while others (like the stack) are unique to each thread.
@@ -74,3 +74,8 @@ LOW MEMORY (Smallest Addresses)
        - If the heap tries to expand but there’s no space, malloc() returns NULL, and your program should handle this.
 
 
+3️⃣. How CPU accesses memory address in RAM without RAM looping through all memory addresses ? (With and without virtual memory)
+4️⃣. Memory layout of RAM
+5️⃣. What is Virtual Memory ? And what does it solve ? (Memory not enough, memory fragmentation, security)
+6. 2 to the power of 32 addresses for each byte corresponds to the 2 to the power of 30 words in 32bit cpu ? Why 2 is used in the power of 32 ? 
+7. Terminal command: getconf PAGE_SIZE
