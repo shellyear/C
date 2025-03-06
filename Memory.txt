@@ -127,7 +127,8 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
      - Continuous - Uninterrupted, without breaks, can be conceptual. Time is continuous (it keeps flowing without gaps).
      - Contiguous - Physically adjacent, touching, with no gaps. Books on a shelf placed contiguously (no space between them)
 
-8️⃣. What is Virtual Memory ? It's components and how it works ?
+8️⃣. What is Virtual Memory? It's components and how it works? Virtual Memory and performance?
+    How it solves these problems (#Memory not enough, #memory fragmentation(external) (holes in the address space), #security) ?
 
    - Virtual memory is a MEMORY MANAGEMENT TECHNIQUE used by OS 
      to give the appearance of a large, continuous block of memory to processes (while actually being non-contiguous),
@@ -159,7 +160,9 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
       1. When a process starts, its virtual address space — comprising segments like the code (text) segment, 
         data segment, stack, and heap—is allocated by the OS and divided into fixed-size pages. 
         However, not all of these pages are loaded into RAM right away; only a small portion of the pages are initially loaded, 
-        while the rest remain on disk (in the swap/page file), ready to be loaded into RAM on demand as the process executes and accesses them.
+        while the rest remain on disk (in the swap/page file), ready to be loaded into RAM on demand as the process executes and accesses them(Demand Paging). 
+        (Offloading not immediately needed pages to disk and dynamically swapping pages(paging out) 
+        to disk to fetch required pages from disk for process solves "Memory not enough" problem)
       2. When a process tries to access a virtual page that is not in RAM, a PAGE FAULT occurs. This happens when:
         The process is trying to execute a piece of code that resides in a virtual page that has been swapped 
         out to disk because it wasn't actively needed in RAM.
@@ -205,6 +208,8 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
        2. The MMU (Memory Management Unit) translates the virtual address to a physical address using the page table.
        3. If the page is in RAM, it retrieves the data.
        4. If the page is not in RAM (page fault), the OS loads it from disk (swap space or page file).
+
+   • Virtual Memory and performance:
 
 9️⃣. What is a PAGE TABLE? And how it works and why it is needed ?
    - Page Table is a data structure used by the operating system to map virtual addresses to physical addresses in a paged memory system.
