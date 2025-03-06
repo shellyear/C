@@ -134,7 +134,7 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
      to give the appearance of a large, continuous block of memory to processes (while actually being non-contiguous),
      even if the physical memory (RAM) is limited.
    - The OS divides Virtual Memory into pages and maps them to physical frames, 
-     which can be scattered across RAM (not stored continuously).
+     which can be scattered across RAM (not stored continuously) - solves memory fragmentation problem.
      This means a process's memory is NOT actually in a single continuous block in RAM — 
      it's spread out, but the process sees it as one large, continuous block thanks to the OS and MMU.
 
