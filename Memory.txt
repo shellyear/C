@@ -100,7 +100,8 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
   • MEMORY MANAGEMENT TECHNIQUES:
      1. Memory Allocation Techniques
         - Contiguous Allocation: Single Partition, Fixed Partitioning, Dynamic Partitioning.
-        - Non-Contiguous Allocation: Paging, Segmentation, Segmented Paging.
+        - Non-Contiguous Allocation: Paging, Segmentation, Segmented Paging. 
+          Virtual Memory (relies on Paging, Segmentation, or both)
      2. Virtual Memory Management
         - Paging: Demand Paging, Pre-Paging.
         - Page Replacement Algorithms: FIFO, LRU, LFU, Optimal (Belady’s), Clock (Second-Chance), Random.
@@ -113,7 +114,7 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
         - Garbage Collection: Reference Counting, Mark & Sweep, Copying GC, Generational GC, Concurrent GC.
      5. Multiprogramming Memory Management
         - Fixed Partitioning, Dynamic Partitioning, Paging & Segmentation, 
-          Swapping (Process Swapping, Context Switching), Memory Compaction (Defragmentation).
+        - Swapping (Process Swapping, Context Switching), Memory Compaction (Defragmentation).
      6. Security & Isolation
         - Memory Protection Units (MPU), ASLR (Address Space Layout Randomization),
           Kernel/User Space Separation, Process Isolation (Sandboxing, VMs, Containers).
