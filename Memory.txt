@@ -155,6 +155,26 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
        Then PAGE TABLE is managed by OS (creates page tables, updates it, and handles faults) 
        and MMU(reads the page table and performs real-time address translation)
 
+   • How Virtual Memory works ? (1)
+      1. When a process starts, its virtual address space — comprising segments like the code (text) segment, 
+        data segment, stack, and heap—is allocated by the OS and divided into fixed-size pages. 
+        However, not all of these pages are loaded into RAM right away; only a small portion of the pages are initially loaded, 
+        while the rest remain on disk (in the swap/page file), ready to be loaded into RAM on demand as the process executes and accesses them.
+      2. When a process tries to access a virtual page that is not in RAM, a PAGE FAULT occurs. This happens when:
+        The process is trying to execute a piece of code that resides in a virtual page that has been swapped 
+        out to disk because it wasn't actively needed in RAM.
+        The OS has moved this page to the swap file or page file (on disk) to make room for other pages.
+      3. Once the page fault occurs:
+         The MMU detects that the required page is not in RAM and triggers the OS to handle it.
+         The OS checks the Page Table, which keeps track of where each virtual page is located (whether it’s in RAM or swapped to disk).
+         If the page is not in RAM, the Page Table will indicate that it's in the swap file.
+      4. OS Loads the Page from Disk:
+         The OS then loads the page from the swap file (or page file) on the disk into available RAM
+         After loading, the Page Table is updated to reflect that the virtual page now maps to a physical frame in RAM.
+      5. Execution Continues
+         The process can now continue execution, as the requested page is in RAM, and the MMU translates virtual addresses to physical addresses seamlessly.
+
+
    • Virtual Memory Components (that make it work):
      1. Virtual Address Space → The logical memory seen by a process (e.g., 0x0000A3B4).
      2. Physical Memory (RAM) → The actual memory in the system.
@@ -167,7 +187,7 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
      9. Demand Paging → Loads pages into memory only when needed, reducing RAM usage.
      10. MMU (Memory Management Unit) - CPU part responsible for converting virtual addresses to physical addresses.
 
-   • How Virtual Memory Works?
+   • How Virtual Memory Works? (2)
      - When a process starts, the OS creates its virtual address space (virtual memory space).
      - The OS allocates memory for different segments of process (code, stack, heap, data) on RAM (physical memory).
      - The process always sees virtual addresses, while the OS & MMU handle mapping to physical memory.
