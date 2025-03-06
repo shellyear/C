@@ -79,21 +79,70 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
 5️⃣. What is Virtual Memory ? And what does it solve ? (Memory not enough, memory fragmentation, security)
 6️⃣. 2 to the power of 32 addresses for each byte corresponds to the 2 to the power of 30 words in 32bit cpu ? Why 2 is used in the power of 32 ? 
 
-7️⃣. What is Virtual Memory ? It's components and how it works ?
+7️⃣. Types of Memory: 
+  1. Primary Memory (Volatile Memory) - RAM, CPU Cache(L1, L2, L3), CPU register memory
+  2. Secondary Memory (Non-volatile Memory) - HDD, SSD, NVMe, Flash memory(USB, SD cards, EEPROM)
+  3. Tertiary Storage (Backup & Archival Memory) - Magnetic Tape, Optical Discs (CD/DVD/Blu-ray)
+  4. Virtual Memory (Abstracted Memory Management)
+     - Paging Memory
+     - Segmented Memory
+     - Segmented Paging Memory
+     - Swap Memory (Swap Space, Pagefile in Windows, Swap Partition in Linux)
+  5. Specialized Memory Types (ROM, NVRAM, MRAM, FeRAM, ReRAM, PRAM)
+  6. Advanced Computing Memory (GPU, TPU, HBM, Persistent Memory)
+  7. Cloud & Distributed Memory 
+     - RAMDisk (Using RAM as disk storage)
+     - Distributed Shared Memory (DSM, for cloud computing)
+     - Object Storage Memory (AWS S3, Google Cloud Storage)
+  8. Quantum Memory (Experimental)
+     - Qubits-based Quantum Memory
+
+  • MEMORY MANAGEMENT TECHNIQUES:
+     1. Memory Allocation Techniques
+        - Contiguous Allocation: Single Partition, Fixed Partitioning, Dynamic Partitioning.
+        - Non-Contiguous Allocation: Paging, Segmentation, Segmented Paging.
+     2. Virtual Memory Management
+        - Paging: Demand Paging, Pre-Paging.
+        - Page Replacement Algorithms: FIFO, LRU, LFU, Optimal (Belady’s), Clock (Second-Chance), Random.
+        - Thrashing Prevention: Working Set Model, Page Fault Frequency (PFF) Model.
+     3. Memory Mapping & Addressing
+        - Memory-Mapped I/O (MMIO), Direct Memory Access (DMA), Shared Memory (IPC - Inter Process Communication), 
+          Memory Protection (Bounds Checking, Access Rights).
+     4. Dynamic Memory Management
+        - Allocation: Stack Allocation, Heap Allocation.
+        - Garbage Collection: Reference Counting, Mark & Sweep, Copying GC, Generational GC, Concurrent GC.
+     5. Multiprogramming Memory Management
+        - Fixed Partitioning, Dynamic Partitioning, Paging & Segmentation, 
+          Swapping (Process Swapping, Context Switching), Memory Compaction (Defragmentation).
+     6. Security & Isolation
+        - Memory Protection Units (MPU), ASLR (Address Space Layout Randomization),
+          Kernel/User Space Separation, Process Isolation (Sandboxing, VMs, Containers).
+     7. Distributed & Cloud Memory Management
+        - Distributed Shared Memory (DSM), Memory Deduplication (Kernel Same-page Merging - KSM), 
+          Remote Direct Memory Access (RDMA).
+
+
+8️⃣. What is Virtual Memory ? It's components and how it works ?
 
    - Virtual memory is a MEMORY MANAGEMENT TECHNIQUE used by OS 
      to give the appearance of a large, continuous block of memory to processes,
      even if the physical memory (RAM) is limited.
 
    - Virtual memory enables multiprogramming by allowing processes to run without being fully loaded into RAM.
-   - Virtual memory allows processes to exceed physical memory limits by abstracting main memory, 
-     using disk space to store inactive data and loading only necessary parts into RAM.
+     Multiprogramming is when the OS keeps multiple processes in memory at the same time to improve CPU utilization.
+   - Virtual memory enables processes to exceed physical memory by 
+     storing inactive data on disk and loading only needed parts into RAM
+   - Allows processes to use more memory than physically available (by using disk storage)
+   - Provides protection so that processes cannot access each other's memory.
+   - Enable efficient multitasking by swapping memory in and out as needed.
    
    • What Virtual Memory does in general?
-     - Gives each process its own address space (process/memory isolation).
-     - Allows processes to use more memory than physically available (by using disk storage)
-     - Provides protection so that processes cannot access each other's memory.
-     - Enable efficient multitasking by swapping memory in and out as needed.
+     - Gives each process its own address space (process/memory isolation). 
+       Then this address space is divided into segments (Stack, Heap, BSS, Data, Text).
+       Each of these segments is further divided into fixed-size pages.
+       Then those fixed-size pages are stored in PAGE TABLE. 
+       Then PAGE TABLE is managed by OS (creates page tables, updates it, and handles faults) 
+       and MMU(reads the page table and performs real-time address translation)
 
    • Virtual Memory Components (that make it work):
      1. Virtual Address Space → The logical memory seen by a process (e.g., 0x0000A3B4).
@@ -105,6 +154,7 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
      7. Swap Space (Page File) → Disk storage used to hold inactive pages when RAM is full.
      8. TLB (Translation Lookaside Buffer) → A cache that speeds up virtual-to-physical address translation.
      9. Demand Paging → Loads pages into memory only when needed, reducing RAM usage.
+     10. MMU (Memory Management Unit) - CPU part responsible for converting virtual addresses to physical addresses.
 
    • How Virtual Memory Works?
      - When a process starts, the OS creates its virtual address space (virtual memory space).
@@ -125,15 +175,7 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
        3. If the page is in RAM, it retrieves the data.
        4. If the page is not in RAM (page fault), the OS loads it from disk (swap space or page file).
 
-   Example: 
-      int main() {
-         int x = 44;
-         return 0;
-      }
-   When the CPU executes an instruction like: "int x = 44;" -> It generates a virtual address for x in the stack segment.
-
-
-8️⃣. What is a PAGE TABLE? And how it works and why it is needed ?
+9️⃣. What is a PAGE TABLE? And how it works and why it is needed ?
    - Page Table is a data structure used by the operating system to map virtual addresses to physical addresses in a paged memory system.
    - Page Table is stored in RAM and managed by the Memory Management Unit (MMU) of the CPU.
    - Page table is a crucial part of virtual memory management 
@@ -156,8 +198,6 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
      2. The page table maps Virtual Page Numbers (VPN) to Physical Frame Numbers (PFN).
      3. When the process accesses memory, the MMU checks the page table to find the physical address
      4. When a process is terminated, its page table is deleted, and its memory is freed.
-
-     Terminal command: getconf PAGE_SIZE
 
     • How Does the Virtual Address(VA) Relate to the Page Table?
       - The virtual address is used as an input to the page table lookup.
@@ -186,6 +226,8 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
             - ARM (32-bit)	- Common Page Sizes: 4 KB, 64 KB
             - x86-64 (64-bit)	- Common Page Sizes: 4 KB, 2 MB, 1 GB
             - x86 (32-bit)	- Common Page Sizes: 4 KB, 4 MB
+            - Terminal command: getconf PAGE_SIZE
+
          
       !!! Only the Page Number gets translated into a Physical Frame Number via the Page Table
             The Offset remains unchanged.
