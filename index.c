@@ -132,7 +132,20 @@ int printMemoryAddress() {
     return 0;
 }
 
+int sum(int k);
+
 int main() {
-    
+    int result = sum(5);
+    printf("%d\n", result); // 5 + 4 + 3 + 2 + 1
     return 0;
+}
+
+int sum(int k) {
+    if (k > 0) {
+      int sumNum = sum(k-1);
+      printf("%d %d\n", k, sumNum);
+      return k + sumNum;
+    } else {
+      return 0;
+    }
 }
