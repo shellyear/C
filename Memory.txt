@@ -112,7 +112,7 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
      4. Dynamic Memory Management
         - Allocation: Stack Allocation, Heap Allocation.
         - Garbage Collection: Reference Counting, Mark & Sweep, Copying GC, Generational GC, Concurrent GC.
-     5. Multiprogramming Memory Management
+     5. Multiprogramming Memory Management 
         - Fixed Partitioning, Dynamic Partitioning, Paging & Segmentation, 
         - Swapping (Process Swapping, Context Switching), Memory Compaction (Defragmentation).
      6. Security & Isolation
@@ -126,7 +126,7 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
 8️⃣. What is Virtual Memory ? It's components and how it works ?
 
    - Virtual memory is a MEMORY MANAGEMENT TECHNIQUE used by OS 
-     to give the appearance of a large, continuous block of memory to processes,
+     to give the appearance of a large, continuous block of memory to processes (while actually being non-contiguous),
      even if the physical memory (RAM) is limited.
 
    - Virtual memory enables multiprogramming by allowing processes to run without being fully loaded into RAM.
