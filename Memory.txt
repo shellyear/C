@@ -128,6 +128,11 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
    - Virtual memory is a MEMORY MANAGEMENT TECHNIQUE used by OS 
      to give the appearance of a large, continuous block of memory to processes (while actually being non-contiguous),
      even if the physical memory (RAM) is limited.
+   - The OS divides Virtual Memory into pages and maps them to physical frames, 
+     which can be scattered across RAM (not stored continuously).
+     This means a process's memory is NOT actually in a single continuous block in RAM — 
+     it's spread out, but the process sees it as one large, continuous block thanks to the OS and MMU.
+
 
    - Virtual memory enables multiprogramming by allowing processes to run without being fully loaded into RAM.
      Multiprogramming is when the OS keeps multiple processes in memory at the same time to improve CPU utilization.
