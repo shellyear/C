@@ -122,6 +122,10 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
         - Distributed Shared Memory (DSM), Memory Deduplication (Kernel Same-page Merging - KSM), 
           Remote Direct Memory Access (RDMA).
 
+   NOTE: 
+     Continuous vs. Contiguous (General Meaning)
+     - Continuous - Uninterrupted, without breaks, can be conceptual. Time is continuous (it keeps flowing without gaps).
+     - Contiguous - Physically adjacent, touching, with no gaps. Books on a shelf placed contiguously (no space between them)
 
 8️⃣. What is Virtual Memory ? It's components and how it works ?
 
