@@ -150,7 +150,8 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
      - Gives each process its own address space (process/memory isolation). 
        Then this address space is divided into segments (Stack, Heap, BSS, Data, Text).
        Each of these segments is further divided into fixed-size pages.
-       Then those fixed-size pages are stored in PAGE TABLE. 
+       Then those fixed-size pages are represented in the PAGE TABLE as mappings of virtual pages to physical frames. 
+       (Virtual pages and physical frames always have the same size.  OS sets the page/frame size at boot time)
        Then PAGE TABLE is managed by OS (creates page tables, updates it, and handles faults) 
        and MMU(reads the page table and performs real-time address translation)
 
@@ -161,7 +162,7 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
      4. Memory Management Unit (MMU) → Hardware that performs address translation using the page table.
      5. Paging Mechanism → Divides memory into fixed-size pages (virtual pages & physical frames).
      6. Page Fault Handling → A mechanism that loads missing pages from disk when accessed.
-     7. Swap Space (Page File) → Disk storage used to hold inactive pages when RAM is full.
+     7. Swap Space (Page File) → A portion of the disk reserved to store memory pages temporarily when physical RAM is full.
      8. TLB (Translation Lookaside Buffer) → A cache that speeds up virtual-to-physical address translation.
      9. Demand Paging → Loads pages into memory only when needed, reducing RAM usage.
      10. MMU (Memory Management Unit) - CPU part responsible for converting virtual addresses to physical addresses.
