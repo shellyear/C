@@ -1,4 +1,4 @@
-1. What is a process? And how it is created? 
+1️⃣. What is a process? And how it is created? 
    - A process is an instance of a program in execution.  
      It consists of the program code (also called the text section), data, stack, heap, and various system resources such as file descriptors and memory space.
    - Each process has its own Process Control Block (PCB), 
@@ -20,7 +20,7 @@
         they run before the very first USER-SPACE PROCESS in OS
       - The very first USER-SPACE PROCESS in an OS (init(older way)/systemd(modern way) in Linux, System Idle Process in Windows, and launchd in macOS) 
         is started after setting up essential kernel threads.
-      - User-Space Processes Started After init: 
+      - User-Space Processes Started After init/systemd: 
          1. System and Service Daemons - These processes run in the background to manage system tasks:
             - Logging Services(rsyslogd) - (logs system messages),
             - Device Management(udevd) - (handles plug-and-play devices),
@@ -109,7 +109,7 @@
                │   ├── spotify (PID 6789)
 
 
-1️⃣.  Memory layout of process (process structure in a UNIX-based OS environment)
+2️⃣.  Memory layout of process (process structure in a UNIX-based OS environment)
 
 ## General Multi-Threaded Process Memory Layout
 - Each process has a virtual memory space divided into different segments. Some of these segments are shared among all threads, while others (like the stack) are unique to each thread.
@@ -165,7 +165,7 @@ HIGH MEMORY (Largest Addresses) (e.g., 0xFFFFFFFF)
 ────────────────────────────────────────────────────────────
 LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
 
-2️⃣. Heap (Grows up) theoretically can collide with stacks(Grows down in memory)
+3️⃣. Heap (Grows up) theoretically can collide with stacks(Grows down in memory)
 
    - Modern OS's implement protections to prevent this from happening:
    1. The OS ensures there’s enough gap between the heap and stacks to prevent overlap
@@ -185,12 +185,12 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
        - If the heap tries to expand but there’s no space, malloc() returns NULL, and your program should handle this.
 
 
-3️⃣. How CPU accesses memory address in RAM without RAM looping through all memory addresses ? (With and without virtual memory)
-4️⃣. Memory layout of RAM
-5️⃣. What is Virtual Memory ? And what does it solve ? (Memory not enough, memory fragmentation, security)
-6️⃣. 2 to the power of 32 addresses for each byte corresponds to the 2 to the power of 30 words in 32bit cpu ? Why 2 is used in the power of 32 ? 
+4️⃣. How CPU accesses memory address in RAM without RAM looping through all memory addresses ? (With and without virtual memory)
+5️⃣. Memory layout of RAM
+6️⃣. What is Virtual Memory ? And what does it solve ? (Memory not enough, memory fragmentation, security)
+7️⃣. 2 to the power of 32 addresses for each byte corresponds to the 2 to the power of 30 words in 32bit cpu ? Why 2 is used in the power of 32 ? 
 
-7️⃣. Types of Memory: 
+8️⃣. Types of Memory: 
   1. Primary Memory (Volatile Memory) - RAM, CPU Cache(L1, L2, L3), CPU register memory
   2. Secondary Memory (Non-volatile Memory) - HDD, SSD, NVMe, Flash memory(USB, SD cards, EEPROM)
   3. Tertiary Storage (Backup & Archival Memory) - Magnetic Tape, Optical Discs (CD/DVD/Blu-ray)
@@ -238,7 +238,7 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
      - Continuous - Uninterrupted, without breaks, can be conceptual. Time is continuous (it keeps flowing without gaps).
      - Contiguous - Physically adjacent, touching, with no gaps. Books on a shelf placed contiguously (no space between them)
 
-8️⃣. What is Virtual Memory? It's components and how it works? Virtual Memory and performance?
+9️⃣. What is Virtual Memory? It's components and how it works? Virtual Memory and performance?
     How it solves these problems (#Memory not enough, #memory fragmentation(external) (holes in the address space), #security) ?
 
    - Virtual memory is a MEMORY MANAGEMENT TECHNIQUE used by OS 
