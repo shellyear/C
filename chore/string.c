@@ -5,9 +5,9 @@ void stringComparison() {
     char str1[] = "Hello";
     char str2[] = "Hello";
 
-    printf("%d", strcmp(str1, str2)); // output: 0; 0 indicates that there is no difference
-    printf("%d", strcmp("A", "C")); // -1; 
-    printf("%d", strcmp("C", "A")); // 1;
+    printf("%d\n", strcmp(str1, str2)); // output: 0; 0 indicates that there is no difference
+    printf("%d\n", strcmp("A", "C")); // -1; 
+    printf("%d\n", strcmp("C", "A")); // 1;
     /*
         The return value of strcmp() is not guaranteed to be exactly -1, 0, or 1.
         It only guarantees:
@@ -16,4 +16,9 @@ void stringComparison() {
             A positive value if the first string is greater.
         The exact negative or positive value depends on the system/compiler implementation.
     */
+}
+
+int main() {
+    stringComparison();
+    return 0;
 }
