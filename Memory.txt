@@ -303,3 +303,5 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
 12. How PCB and CPU state are related?
 12. Process memory layout has a Stack segment. CPU has Stack Pointer(SP), how it works ? 
 13. Stack segment layout
+14. What is a process and how it is created ? Which system calls are used to create a process?
+    (put this into 1st place).
