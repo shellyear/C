@@ -1,8 +1,68 @@
 1. What is a process? And how it is created? 
    - A process is an instance of a program in execution.  
      It consists of the program code (also called the text section), data, stack, heap, and various system resources such as file descriptors and memory space.
-   - Each process has its own Process Control Block (PCB), which stores information 
-     like process ID (PID), process state (New/Ready/Running/Wai), registers, and scheduling information.
+   - Each process has its own Process Control Block (PCB), 
+     PCB is a data structure maintained by the OS to store essential information about a process.
+     which stores information like process ID (PID), process state (New/Ready/Running/Waiting(Blocked)/Terminated),
+     CPU state info (
+      Program Counter - PC, 
+      General Purpose Registers - register identifiers and their values, 
+      Stack Pointer - SP (also a Register in CPU),
+      Processor Status Word(PSW) -  Contains condition flags, mode (user/kernel), and interrupt status.
+     ) and scheduling information(Process priority, Scheduling queue pointers, CPU time used, Other scheduling policies (like round-robin, priority-based, etc.)).
+   - When a context switch occurs (i.e., switching from one process to another),
+   the OS saves the CPU state (registers, program counter, etc.) of the current process into 
+   its PCB and loads the saved state of the next process into the CPU
+
+     • Very first processes in OS? 
+      - Every process in an OS (except the very first process) always has a parent process.
+      - The actual very first processes in OS are KERNEL-SPACE PROCESSES(also called kernel threads),
+        they run before the very first USER-SPACE PROCESS in OS
+      - The very first USER-SPACE PROCESS in an OS (init(older way)/systemd(modern way) in Linux, System Idle Process in Windows, and launchd in macOS) 
+        is started after setting up essential kernel threads.
+      - User-Space Processes Started After init: 
+         1. System and Service Daemons - These processes run in the background to manage system tasks:
+            - Logging Services(rsyslogd) - (logs system messages),
+            - Device Management(udevd) - (handles plug-and-play devices),
+            - Networking Services(NetworkManager, dhclient) - (for IP configuration),
+            - Scheduled Jobs(cron or systemd timers) - (automates tasks),
+            - Security Services(sshd - SSH server, firewalld - firewall management)
+            - Inter-process Communication: dbus-daemon
+            - Audio Services: pulseaudio, pipewire
+         2. User Session Management: (Handles user logins and sessions)
+            - Login Manager: getty or gdm, sddm, lightdm (for graphical login screens)
+            - Shell Sessions: bash, zsh (command-line shells)
+         3. Graphical User Interface (If the system has a GUI): 
+            - Xorg / Wayland: Manages the graphical display
+            - Window Manager: gnome-shell, plasmashell, xfwm4, etc.
+            - Login Manager: gdm, sddm, lightdm
+         4. User Applications (Automatically Launched)
+            - Background Apps: System tray applications, update managers
+            - Startup Applications: Any program configured to start at boot
+      
+      • Boot Sequence in Detail: 
+         1. Firmware (BIOS/UEFI) initializes hardware
+         2. Bootloader loads the kernel into memory
+         3. Kernel initializes itself and starts kernel-space processes (kernel threads)
+         4. Kernel starts the first user-space process (e.g., init/systemd, launchd, wininit.exe)
+         5. User-space processes take over, launching system services and user applications
+
+      • Process Tree Example (Linux with systemd)
+            systemd (PID 1)
+            ├── udevd (Device management)
+            ├── NetworkManager (Handles network connections)
+            ├── cron (Runs scheduled tasks)
+            ├── gdm (Graphical login manager)
+            │   ├── Xorg (Graphical display server)
+            │   ├── gnome-shell (User interface)
+            ├── sshd (SSH server)
+            ├── bash (User shell)
+
+      • Process Creation Steps:
+         1. Parent process initiates creation - A new process is usually created by an existing process 
+         (called the parent process) using system calls like fork() in Unix/Linux or CreateProcess() in Windows.
+         2. Memory Allocation - The OS allocates memory for the new process, including space for its code, stack, heap, and data.
+         3. Loading the Program into Memory - If the new process needs to run a different program, the OS loads the executable file into memory using system calls like exec() in Unix.
 
 1️⃣.  Memory layout of process (process structure in a UNIX-based OS environment)
 
