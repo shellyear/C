@@ -47,7 +47,7 @@
          4. Kernel starts the first user-space process (e.g., init/systemd, launchd, wininit.exe)
          5. User-space processes take over, launching system services and user applications
 
-      • Process Tree Example (Linux with systemd)
+      • Process Tree Example (Linux with systemd) (User-space processes)
             systemd (PID 1)
             ├── udevd (Device management)
             ├── NetworkManager (Handles network connections)
@@ -59,10 +59,55 @@
             ├── bash (User shell)
 
       • Process Creation Steps:
-         1. Parent process initiates creation - A new process is usually created by an existing process 
+         1. Parent process initiates creation 
+            - A new process is usually created by an existing process 
          (called the parent process) using system calls like fork() in Unix/Linux or CreateProcess() in Windows.
-         2. Memory Allocation - The OS allocates memory for the new process, including space for its code, stack, heap, and data.
-         3. Loading the Program into Memory - If the new process needs to run a different program, the OS loads the executable file into memory using system calls like exec() in Unix.
+         2. Memory Allocation
+            - The OS allocates memory for the new process, including space for its code, stack, heap, and data.
+         3. Loading the Program into Memory
+            - If the new process needs to run a different program, the OS loads the executable file into memory using system calls like exec() in Unix.
+         4. Assigning Unique Process ID (PID) 
+            - The OS assigns a unique Process ID (PID) to the new process for identification.
+         5. Initializing PCB (Process Control Block)
+            The OS creates and initializes the process’s PCB, storing details such as:
+            - Process ID (PID)
+            - Parent process ID
+            - Process state (Ready, Running, Waiting, etc.)
+            - CPU state info(PC, SP, PSW, General purpose register identifiers and their values)
+            - Memory management information/Scheduling information
+         6. Adding to the Process Scheduler - The new process is placed in the Ready Queue, waiting for CPU execution.
+         7. Process Execution Starts 
+            - The OS scheduler picks the process from the ready queue and assigns CPU time.
+
+      • Process Creation Methods
+         1. Fork-Exec Model (Unix/Linux)
+           - fork() creates a child process that is an exact copy of the parent.
+           - exec() replaces the process’s memory with a new program.
+         2. Windows Process Creation
+           - Uses CreateProcess() to create a new process with a specified program.
+         3. Thread-Based Process Creation
+           - Instead of creating a full process, multi-threading allows creating 
+             lightweight threads inside an existing process.
+
+      Example of user-space process creation (Spotify):
+         1. If Opened from the Terminal (Linux/macOS)
+           - Parent process: Terminal shell (bash, zsh, etc.)
+           - Example process tree:
+               bash (PID 1234)  # Terminal shell
+                ├── spotify (PID 5678)  # Spotify launched from terminal
+         2. If Opened from Desktop (Linux/macOS/Windows): 
+           - Linux (GNOME, KDE, etc.):
+               gnome-shell (PID 3456)  # GNOME Desktop
+               ├── spotify (PID 7890)
+           - Windows:
+               explorer.exe (PID 2345)  # Windows GUI
+               ├── spotify.exe (PID 6789)  # Spotify
+         3. If opened on startup (Autostart)   
+            - Parent process: System service (systemd, launchd, etc.)
+              systemd (PID 1)
+               ├── gnome-session (PID 2345)
+               │   ├── spotify (PID 6789)
+
 
 1️⃣.  Memory layout of process (process structure in a UNIX-based OS environment)
 
@@ -362,12 +407,6 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
 10. What is IPC (Inter Process communication) ?
    And since processes are isolated by Virtual Memory(Paging, Segmenting), how the IPC is achieved?
    Elaborate on two main ways of IPC: 1. shared memory 2. message passing. 
-   Is shared memory paged ? 
-
-
-11. Process vs PCB (Process Control Block)?
-12. How PCB and CPU state are related?
-12. Process memory layout has a Stack segment. CPU has Stack Pointer(SP), how it works ? 
-13. Stack segment layout
-14. What is a process and how it is created ? Which system calls are used to create a process?
-    (put this into 1st place).
+   Is shared memory paged ?
+11. Process memory layout has a Stack segment. CPU has Stack Pointer(SP), how it works ? 
+12. Stack segment layout
