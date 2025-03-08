@@ -1,3 +1,9 @@
+1. What is a process? And how it is created? 
+   - A process is an instance of a program in execution.  
+     It consists of the program code (also called the text section), data, stack, heap, and various system resources such as file descriptors and memory space.
+   - Each process has its own Process Control Block (PCB), which stores information 
+     like process ID (PID), process state (New/Ready/Running/Wai), registers, and scheduling information.
+
 1️⃣.  Memory layout of process (process structure in a UNIX-based OS environment)
 
 ## General Multi-Threaded Process Memory Layout
