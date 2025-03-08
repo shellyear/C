@@ -298,3 +298,4 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
 
 11. Process vs PCB (Process Control Block)?
 12. Process memory layout has a Stack segment. CPU has Stack Pointer(SP), how it works ? 
+13. Stack segment layout
