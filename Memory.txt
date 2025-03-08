@@ -295,7 +295,9 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
 
 10. What is IPC (Inter Process communication) ?
    And since processes are isolated by Virtual Memory(Paging, Segmenting), how the IPC is achieved?
-   Elaborate on two main ways of IPC: 1. shared memory 2. message passing
+   Elaborate on two main ways of IPC: 1. shared memory 2. message passing. 
+   Is shared memory paged ? 
+
 
 11. Process vs PCB (Process Control Block)?
 12. How PCB and CPU state are related?
