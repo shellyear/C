@@ -134,10 +134,24 @@ int printMemoryAddress() {
 
 int sum(int k);
 
+int strlength(char *s) {  // s holds a memory address
+    int length = 0;
+    printf("%p", s); // 0x16bdf2f185
+
+    
+    while (*s != '\0') { // Dereferencing s to access characters
+        length++;
+        s++;  // Move to the next character (next memory address)
+    }
+    return length;
+}
+
 int main() {
-    int result = sum(5);
-    printf("%d\n", result); // 5 + 4 + 3 + 2 + 1
-    return 0;
+    char str1[] = "Hello";  // str1 is an array, but decays into a pointer
+    char *str2 = "World";   // str2 directly holds the memory address of "World"
+
+    printf("%d\n", strlength(str1)); // Passing the address of the first character
+    printf("%d\n", strlength(str2)); // Also passing a memory address    return 0;
 }
 
 int sum(int k) {

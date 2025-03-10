@@ -1,0 +1,2 @@
+File systems, Volumes (e.g in SSD)
+BSD (Berkeley software distribution), BSD device name (e.g en0 for wifi interface)
