@@ -7,3 +7,9 @@
 4. dig wikipedia.org
  - dig (Domain Information Groper) -  is a more advanced and powerful version of nslookup
  - It provides more detailed DNS query results and is commonly used by network administrators for troubleshooting DNS issues.
+5. dig wikipedia.org +trace
+ - Shows how the DNS query travels from root servers to the final answer.
+6. dig -x 208.80.154.224
+ - Reverse DNS Lookup (Find Domain for an IP)
+ - Finds the domain name associated with an IP address.
+
