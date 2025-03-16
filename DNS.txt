@@ -12,4 +12,5 @@
 6. dig -x 208.80.154.224
  - Reverse DNS Lookup (Find Domain for an IP)
  - Finds the domain name associated with an IP address.
-
+7. strace ping example.com
+    - on Linux, to trace system calls and see the DNS resolution)
