@@ -1,0 +1,4 @@
+1. nslookup whoami.akamai.net 
+ -  return the actual DNS resolver your router is using
+2. whois 89.218.85.231
+ - which ISP or DNS provider owns this IP.

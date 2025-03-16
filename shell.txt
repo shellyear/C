@@ -1,0 +1,7 @@
+1. What is shell ? 
+
+Shell = User-space program that acts as a command-line interface for interacting with the OS kernel.
+
+- The shell is just a user-space program.
+- It talks to the kernel using system calls (provided by kernel) to perform actions in user space.
+- It doesn’t run in kernel space—it only requests services from the kernel when needed. 
