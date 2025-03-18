@@ -1,2 +1,7 @@
 1. how to remove or insert virus into an image ?
 2. what is a virus 
+3. Address Space Layout Randomization (ASLR)
+- a memory defense technique used to increase security by randomizing the memory addresses 
+of a target process
+- It aims to minimize predictability and reduce the exploitation of vulnerabilities 
+by changing the loading address of system modules and user programs.
