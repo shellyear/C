@@ -410,3 +410,4 @@ LOW MEMORY (Smallest Addresses) (e.g., 0x00000000)
    Is shared memory paged ?
 11. Process memory layout has a Stack segment. CPU has Stack Pointer(SP), how it works ? 
 12. Stack segment layout
+13. Race condition
